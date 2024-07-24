@@ -5,7 +5,7 @@ def get_session():
     acces_key = os.environ["Access"]
     secret_key = os.environ["Secret"]
     session_token = os.environ["Session"]
-    return boto3.Session(acces_key, secret_key, session_token)
+    return boto3.Session(acces_key, secret_key, session_token, region_name="us-east-1")
     
 
 def list_available_models():
