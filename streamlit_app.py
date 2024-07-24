@@ -3,8 +3,8 @@ import utils
 from streamlit_cognito_auth import CognitoHostedUIAuthenticator
 import authenticate
 
-(client, id, secret, uri) = utils.get_cognito_info()
-authenticator = CognitoHostedUIAuthenticator(client, id, secret, use_cookies=False)
+# (client, id, secret, uri) = utils.get_cognito_info()
+# authenticator = CognitoHostedUIAuthenticator(client, id, secret, use_cookies=False)
 
 # is_logged_in = authenticator.login()
 # if not is_logged_in:
