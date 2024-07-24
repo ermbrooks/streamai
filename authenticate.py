@@ -10,9 +10,9 @@ import utils
 # Read constants from environment file
 # ------------------------------------
 load_dotenv()
-COGNITO_DOMAIN = utils.get_cognito_info(3)
-CLIENT_ID = utils.get_cognito_info(1)
-CLIENT_SECRET = utils.get_cognito_info(2)
+COGNITO_DOMAIN = utils.get_cognito_info[3]
+CLIENT_ID = utils.get_cognito_info[1]
+CLIENT_SECRET = utils.get_cognito_info[2]
 APP_URI = os.environ.get("AppUri")
 
 
