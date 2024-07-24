@@ -4,7 +4,7 @@ import os, boto3
 def get_session():
     acces_key = os.environ["Access"]
     secret_key = os.environ["Secret"]
-    session_token = os.environ["Token"]
+    session_token = os.environ["Session"]
     return boto3.Session(acces_key, secret_key, session_token)
     
 
