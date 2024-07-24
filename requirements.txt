@@ -3,3 +3,5 @@ boto3
 streamlit-cognito-auth
 python-dotenv
 requests
+altair
+pydeck
