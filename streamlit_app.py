@@ -1,19 +1,12 @@
 import streamlit as st
-import os, boto3
+import utils
+from streamlit_cognito_auth import CognitoHostedUIAuthenticator
 
-def get_session():
-    acces_key = os.environ["Access"]
-    secret_key = os.environ["Secret"]
-    session_token = os.environ["Session"]
-    return boto3.Session(acces_key, secret_key, session_token, region_name="us-east-1")
-    
+(client, id, secret) = utils.get_cognito_info()
+authenticator = CognitoHostedUIAuthenticator(client, id, secret, use_cookies=False)
 
-def list_available_models():
-    session = get_session()
-    bedrock = session.client("bedrock")
-    models = bedrock.list_foundation_models()
-    return models
+is_logged_in = authenticator.login()
+if not is_logged_in:
+    print("Login failed")
 
-
-
-st.write(list_available_models())
+st.write(utils.list_available_models())
