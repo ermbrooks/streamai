@@ -6,3 +6,5 @@ requests
 altair
 pydeck
 st-pages
+langchain
+langchain-community

@@ -35,7 +35,7 @@ add_page_title()  # Optional method to add title and icon to current page
 st.write("""
          Welcome,
          
-         This app is an example of how to get User Authentication and page wise authorization in a Streamlit multi-page app using AWS Cognito 🚀! 
+         This is a playground app for AI projects.
          """)
 
 
