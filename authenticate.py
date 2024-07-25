@@ -14,6 +14,7 @@ CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 APP_URI = os.environ.get("APP_URI")
 
+print(f"domain: {COGNITO_DOMAIN}")
 
 # ------------------------------------
 # Initialise Streamlit state variables
