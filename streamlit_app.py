@@ -39,6 +39,6 @@ st.write("""
          """)
 
 
-st.text_input("Ask a question", "Why did the chicken cross the road?")
+st.text_input("Ask a question", placeholder="Why did the chicken cross the road?")
 
 
