@@ -32,11 +32,15 @@ def initialise_st_state_vars():
         Nothing.
     """
     logger.info(f"domain: {COGNITO_DOMAIN}")
+    logger.info(f"client ID: {CLIENT_ID}")
+    logger.info(f"secret: {CLIENT_SECRET}")
+    logger.info(f"app URI: {APP_URI}")
 
     if "auth_code" not in st.session_state:
         st.session_state["auth_code"] = ""
     if "authenticated" not in st.session_state:
         st.session_state["authenticated"] = False
+        logger.info("not authenticated")
     if "user_cognito_groups" not in st.session_state:
         st.session_state["user_cognito_groups"] = []
 
