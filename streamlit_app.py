@@ -10,13 +10,13 @@ st.set_page_config(
 )
 
 # Check authentication when user lands on the home page.
-authenticate.set_st_state_vars()
+# authenticate.set_st_state_vars()
 
-# Add login/logout buttons
-if st.session_state["authenticated"]:
-    authenticate.button_logout()
-else:
-    authenticate.button_login()
+# # Add login/logout buttons
+# if st.session_state["authenticated"]:
+#     authenticate.button_logout()
+# else:
+#     authenticate.button_login()
 
 # st.session_state
 
