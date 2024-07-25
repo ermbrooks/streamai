@@ -42,3 +42,7 @@ st.write("""
 st.text_input("Ask a question", placeholder="Why did the chicken cross the road?")
 st.button("Submit")
 
+with st.sidebar:
+    st.write("sidebar text")
+    st.write("sidebar text 2")
+
