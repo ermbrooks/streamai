@@ -4,16 +4,15 @@ from dotenv import load_dotenv
 import requests
 import base64
 import json
-import utils
 
 # ------------------------------------
 # Read constants from environment file
 # ------------------------------------
 load_dotenv()
-COGNITO_DOMAIN = os.environ["CognitoDomain"]
-CLIENT_ID = os.environ["AppClient"]
-CLIENT_SECRET = os.environ["AppSecret"]
-APP_URI = os.environ.get("AppUri")
+COGNITO_DOMAIN = os.environ.get("COGNITO_DOMAIN")
+CLIENT_ID = os.environ.get("CLIENT_ID")
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+APP_URI = os.environ.get("APP_URI")
 
 
 # ------------------------------------
@@ -44,9 +43,9 @@ def get_auth_code():
     Returns:
         Nothing.
     """
-    auth_query_params = st.experimental_get_query_params()
+    auth_query_params = st.query_params.to_dict()
     try:
-        auth_code = dict(auth_query_params)["code"][0]
+        auth_code = dict(auth_query_params)["code"]
     except (KeyError, TypeError):
         auth_code = ""
 
@@ -169,15 +168,13 @@ def get_user_cognito_groups(id_token):
     Returns:
         user_cognito_groups: a list of all the cognito groups the user belongs to.
     """
-    user_cognito_groups = []
     if id_token != "":
         header, payload, signature = id_token.split(".")
         printable_payload = base64.urlsafe_b64decode(pad_base64(payload))
         payload_dict = json.loads(printable_payload)
-        try:
-            user_cognito_groups = list(dict(payload_dict)["cognito:groups"])
-        except (KeyError, TypeError):
-            pass
+        user_cognito_groups = list(dict(payload_dict)["cognito:groups"])
+    else:
+        user_cognito_groups = []
     return user_cognito_groups
 
 
@@ -209,33 +206,56 @@ logout_link = f"{COGNITO_DOMAIN}/logout?client_id={CLIENT_ID}&logout_uri={APP_UR
 
 html_css_login = """
 <style>
-.button-login {
-  background-color: skyblue;
-  color: white !important;
-  padding: 1em 1.5em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
+    .button-login {
+    background-color: #04AA6D;
+    color: white !important;
+    padding: 0.3rem 0.75rem; 
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    border-radius: 0.5rem;
+    min-height: 38.4px;
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    }
 
-.button-login:hover {
-  background-color: #555;
-  text-decoration: none;
-}
+    .button-login:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    }
 
-.button-login:active {
-  background-color: black;
-}
+    .button-login:active {
+    background-color: black;
+    }
 
+    .button-logout {
+    background-color: #E9967A;
+    color: white !important;
+    padding: 0.3rem 0.75rem; 
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    border-radius: 0.5rem;
+    min-height: 38.4px;
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    }
+
+    .button-logout:hover {
+    text-decoration: none;
+    opacity: 0.8;
+    }
+
+    .button-logout:active {
+    background-color: black;
+    }
 </style>
 """
 
 html_button_login = (
     html_css_login
-    + f"<a href='{login_link}' class='button-login' target='_self'>Log In</a>"
+    + f"<a data-testid='stSidebarContent' href='{login_link}' class='button-login' target='_self'>Sign in</a>"
 )
+
 html_button_logout = (
     html_css_login
-    + f"<a href='{logout_link}' class='button-login' target='_self'>Log Out</a>"
+    + f"<a href='{logout_link}' class='button-logout' target='_self'>Sign out</a>"
 )
 
 
@@ -246,7 +266,7 @@ def button_login():
         Html of the login button.
     """
     return st.sidebar.markdown(f"{html_button_login}", unsafe_allow_html=True)
-
+    
 
 def button_logout():
     """
