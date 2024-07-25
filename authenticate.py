@@ -14,7 +14,7 @@ CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 APP_URI = os.environ.get("APP_URI")
 
-print(f"domain: {COGNITO_DOMAIN}")
+
 
 # ------------------------------------
 # Initialise Streamlit state variables
@@ -26,6 +26,8 @@ def initialise_st_state_vars():
     Returns:
         Nothing.
     """
+    print(f"domain: {COGNITO_DOMAIN}")
+    
     if "auth_code" not in st.session_state:
         st.session_state["auth_code"] = ""
     if "authenticated" not in st.session_state:
