@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import requests
 import base64
 import json
+import logging
+from logging import getLogger
 
 # ------------------------------------
 # Read constants from environment file
@@ -14,6 +16,9 @@ CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 APP_URI = os.environ.get("APP_URI")
 
+logger = logging.getLogger()
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.INFO)
 
 
 # ------------------------------------
@@ -26,8 +31,8 @@ def initialise_st_state_vars():
     Returns:
         Nothing.
     """
-    print(f"domain: {COGNITO_DOMAIN}")
-    
+    logger.info(f"domain: {COGNITO_DOMAIN}")
+
     if "auth_code" not in st.session_state:
         st.session_state["auth_code"] = ""
     if "authenticated" not in st.session_state:
