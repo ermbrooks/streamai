@@ -1,5 +1,5 @@
 import streamlit as st
-from numpy import random
+import random
 import time
 import authenticate as authenticate
 
