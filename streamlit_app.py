@@ -1,7 +1,7 @@
 import streamlit as st
 from numpy import random
 import time
-# import authenticate as authenticate
+import authenticate as authenticate
 
 st.set_page_config(
     page_title="Home",
@@ -64,6 +64,7 @@ def response_generator():
         yield word + " "
         time.sleep(0.05)
 
+
 st.title("Simple chat")
 
 # Initialize chat history
@@ -88,8 +89,3 @@ if prompt := st.chat_input("What is up?"):
         response = st.write_stream(response_generator())
     # Add assistant response to chat history
     st.session_state.messages.append({"role": "assistant", "content": response})
-
-with st.sidebar:
-    st.write("sidebar text")
-    st.write("sidebar text 2")
-
