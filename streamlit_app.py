@@ -51,6 +51,10 @@ st.set_page_config(
 # if prompt:
 #     st.write(f"User has sent the following prompt: {prompt}")
 
+with st.sidebar:
+    st.write("page 1")
+    st.write("page 2")
+
 # Streamed response emulator
 def response_generator():
     response = random.choice(
