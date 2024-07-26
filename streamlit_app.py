@@ -45,6 +45,11 @@ st.button("Submit")
 with st.chat_message("assistant"):
     st.write("How may I help you?")
 
+
+prompt = st.chat_input("Say something")
+if prompt:
+    st.write(f"User has sent the following prompt: {prompt}")
+
 with st.sidebar:
     st.write("sidebar text")
     st.write("sidebar text 2")
